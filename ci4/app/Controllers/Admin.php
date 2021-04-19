@@ -98,7 +98,7 @@ class Admin extends BaseController
 				Name: '.$stuDbRow['stu_name'] . ',<br>
 				Father: '.$stuDbRow["father_name"].',<br>
 				Roll No: '.$row["stu_roll"].',<hr>
-				Add another <a class="btn btn-primary" href="'.site_url("admin/add_student").'">Student</a> or, 
+				Goto <a class="btn btn-primary" href="'.site_url("admin/add_student").'">Add Student</a> or, 
 				<a class="btn btn-primary" href="'.site_url("admin/all_stu").'">Students List</a> or,
 				<a class="btn btn-primary" href="'.site_url('admin/single_result/'.$id).'">View Marksheet</a>
 				</div>';
@@ -113,6 +113,7 @@ class Admin extends BaseController
 					
 					$html = '<div class="alert alert-success" >
 							Result uploded of <strong>'.$rows[0]['stu_name'] . '</strong>. Go to 
+							<a href="'.site_url('admin/all_stu').'">Students List</a> or,
 							<a href="'.site_url('admin/add_student').'">Add Student</a> or,
 							<a href="'.site_url('admin/single_result/'.$id).'">View Marksheet</a>
 							</div>

@@ -60,13 +60,13 @@ We add student details in database and then go next page to upload student marks
                            <th>Stu. Id</th>
                            <th>Stu. Name</th>
                            <th>Father</th>
-                           <th>Mother</th>
-                           <th>Gender</th>
+                           <!-- <th>Mother</th>
+                           <th>Gender</th> -->
                            <th>D.O.B.</th>
-                           <th>Address</th>
+                           <!-- <th>Address</th>
                            <th>Mobile</th>
                            <th>Created_at</th>
-                           <th>Updated_at</th>
+                           <th>Updated_at</th> -->
                            <th>Result Status</th>
                            <th class="text-center" colspan="3">Action</th>
                         </tr>
@@ -79,13 +79,13 @@ We add student details in database and then go next page to upload student marks
                         <td><?=$r["id"];?></td>
                         <td><?=$r["stu_name"];?></td>
                         <td><?=$r["father_name"];?></td>
-                        <td><?=$r["mother_name"];?></td>
-                        <td><?=$r["gender"];?></td>
+                        <!-- <td><?=$r["mother_name"];?></td>
+                        <td><?=$r["gender"];?></td> -->
                         <td><?=$r["dob"];?></td>
-                        <td><?=$r["address"];?></td>
+                        <!-- <td><?=$r["address"];?></td>
                         <td><?=$r["mobile"];?></td>
                         <td><?=$r["created_at"];?></td>
-                        <td><?=$r["updated_at"];?></td>
+                        <td><?=$r["updated_at"];?></td> -->
                         <td class="text-center">
 
                            <!-- This is conditional link -->
@@ -106,23 +106,23 @@ We add student details in database and then go next page to upload student marks
                               ?> -->
                         </td>
                         <td>
-                           <div class="btn-group">
+                           <div class="btn-group" style="width:200px">
                               <!-- This is conditional link -->
                               <!-- if result uploaded -->
                               <?php if ($r['stu_id'] != null): ?>
-                              <a title="View Result with marksheet." class="btn btn-primary"
+                              <a title="View Result with marksheet." class="btn btn-primary"  data-bs-toggle="tooltip" data-bs-placement="top"
                                  href="<?=site_url('admin/single_result/'.$r["id"])?>"><i class="fa fa-eye"></i></a>
                               <?php else: ?>
                               <!-- if result didn't upload -->
-                              <a title="Upload result." class="btn btn-warning"
+                              <a title="Upload result." class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="top"
                                  href="<?=site_url("admin/upload_result/".$r["id"])?>"><i class="fa fa-upload"></i></a>
                               <?php endif;?>
 
-                              <a title="Edit & Update Student Details." class="btn btn-info"
-                                 href="<?=site_url('admin/edit_stu/'.$r["id"])?>"><i class="fa fa-pencil"></i></a>
-                              <a title="Edit & Update Result." class="btn btn-warning"
-                                 href="<?=site_url('admin/edit_result/'.$r["id"])?>"><i class="fa fa-pencil"></i></a>
-                              <a title="Detele" class="btn btn-danger"
+                              <a title="Edit & Update Student Details." class="btn btn-info"  data-bs-toggle="tooltip" data-bs-placement="top"
+                                 href="<?=site_url('admin/edit_stu/'.$r["id"])?>"><i class="fa fa-user">&nbsp;</i><i class="fa fa-pencil"></i></a>
+                              <a title="Edit & Update Result." class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="top"
+                                 href="<?=site_url('admin/edit_result/'.$r["id"])?>"> <i class="fa fa-list">&nbsp;<i class="fa fa-pencil"></i></i></a>
+                              <a title="Detele" class="btn btn-danger"  data-bs-toggle="tooltip" data-bs-placement="top"
                                  onclick="return confirm('Are you confirm to delete <?=$r["stu_name"];?> ?');"
                                  href="<?=site_url('admin/del_stu/'.$r["id"])?>"><i class="fa fa-trash"></i></a>
                            </div>
@@ -155,6 +155,13 @@ We add student details in database and then go next page to upload student marks
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
+
+    <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+    </script>
 </body>
 
 </html>
