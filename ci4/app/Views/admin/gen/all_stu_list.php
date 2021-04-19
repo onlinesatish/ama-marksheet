@@ -19,6 +19,9 @@ We add student details in database and then go next page to upload student marks
       crossorigin="anonymous" />
 
    <title>Admin Panel!</title>
+   <style>
+   table th,table td{white-space: nowrap;}
+   </style>
 </head>
 
 <body>
@@ -33,20 +36,20 @@ We add student details in database and then go next page to upload student marks
          <div class="card">
             <div class="card-header">
                <div class="d-flex justify-content-between">
-                  <a title="Go Back" class="btn btn-danger" href="<?=site_url('admin');?>"><i class="fa fa-arrow-left">
-                        &nbsp; Go Back</i></a>
-                  <a title="Add Student" class="btn btn-primary" href="<?=site_url('admin/add_student');?>"><i
-                        class="fa fa-user-plus"></i> &nbsp; Add Student</a>
-                  <a title="Go to view deleted data" class="btn btn-warning" href="<?=site_url('admin/stu_bin');?>"><i
-                        class="fa fa-recycle"></i> Recycle Bin &nbsp; <i class="fa fa-arrow-right"></i></a>
+                  <a title="Go Back" class="btn btn-danger" href="<?=site_url('admin');?>" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fa fa-arrow-left">
+                        &nbsp; <span class="d-none d-md-inline-block">Go Back</span></i></a>
+                  <a title="Add Student" class="btn btn-primary" href="<?=site_url('admin/add_student');?>" data-bs-toggle="tooltip" data-bs-placement="top"><i
+                        class="fa fa-user-plus"></i> &nbsp; <span class="d-none d-md-inline-block">Add Student</span></a>
+                  <a title="Go to view deleted data" class="btn btn-warning" href="<?=site_url('admin/stu_bin');?>" data-bs-toggle="tooltip" data-bs-placement="top"><i
+                        class="fa fa-recycle"></i> <span class="d-none d-md-inline-block">Recycle Bin</span> &nbsp; <i class="fa fa-arrow-right"></i></a>
                   <?php if($verified_admin):?>
-                  <a title="Go to view deleted data" class="btn btn-danger" href="<?=site_url('admin/logout_admin');?>">
-                     Logout <i class=" fa fa-sign-out"></i>
+                  <a title="Go to view deleted data" class="btn btn-danger" href="<?=site_url('admin/logout_admin');?>" data-bs-toggle="tooltip" data-bs-placement="top">
+                     <span class="d-none d-md-inline-block">Logout</span> <i class=" fa fa-sign-out"></i>
                   </a>
                   <?php else: ?>
                   <a title="Go to view deleted data" class="btn btn-success"
                      href="<?=site_url('admin/verify_admin');?>">
-                     Login <i class=" fa fa-sign-in"></i>
+                     <span class="d-none d-md-inline-block">Login</span> <i class=" fa fa-sign-in"></i>
                   </a>
                   <?php endif; ?>
                </div>
@@ -60,13 +63,13 @@ We add student details in database and then go next page to upload student marks
                            <th>Stu. Id</th>
                            <th>Stu. Name</th>
                            <th>Father</th>
-                           <!-- <th>Mother</th>
-                           <th>Gender</th> -->
+                           <th>Mother</th>
+                           <th>Gender</th>
                            <th>D.O.B.</th>
-                           <!-- <th>Address</th>
+                           <th>Address</th>
                            <th>Mobile</th>
                            <th>Created_at</th>
-                           <th>Updated_at</th> -->
+                           <th>Updated_at</th>
                            <th>Result Status</th>
                            <th class="text-center" colspan="3">Action</th>
                         </tr>
@@ -76,16 +79,16 @@ We add student details in database and then go next page to upload student marks
     foreach ($rows as $r) :
       ?>
                      <tr>
-                        <td><?=$r["id"];?></td>
+                        <td class="text-center"><?=$r["id"];?></td>
                         <td><?=$r["stu_name"];?></td>
                         <td><?=$r["father_name"];?></td>
-                        <!-- <td><?=$r["mother_name"];?></td>
-                        <td><?=$r["gender"];?></td> -->
+                        <td><?=$r["mother_name"];?></td>
+                        <td><?=$r["gender"];?></td>
                         <td><?=$r["dob"];?></td>
-                        <!-- <td><?=$r["address"];?></td>
+                        <td><?=$r["address"];?></td>
                         <td><?=$r["mobile"];?></td>
                         <td><?=$r["created_at"];?></td>
-                        <td><?=$r["updated_at"];?></td> -->
+                        <td><?=$r["updated_at"];?></td>
                         <td class="text-center">
 
                            <!-- This is conditional link -->
@@ -96,17 +99,9 @@ We add student details in database and then go next page to upload student marks
                            <!-- if result didn't upload -->
                            <i class="fa fa-times text-danger"></i>
                            <?php endif;?>
-
-                           <!-- <?php
-                                 if ($r['stu_id'] != null) {
-                                    echo '<span class="btn btn-success">Uploaded</span>';
-                                 } else {
-                                    echo '<a class="btn btn-danger" href="'.site_url("admin/upload_result/".$r["id"]).'">Upload</a>';
-                                 }
-                              ?> -->
                         </td>
                         <td>
-                           <div class="btn-group" style="width:200px">
+                           <div class="btn-group" >
                               <!-- This is conditional link -->
                               <!-- if result uploaded -->
                               <?php if ($r['stu_id'] != null): ?>
