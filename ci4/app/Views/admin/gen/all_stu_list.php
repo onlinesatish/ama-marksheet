@@ -33,7 +33,7 @@ We add student details in database and then go next page to upload student marks
       <div class="container py-4">
 
 
-         <div class="card">
+         <div style="min-width: 300px; max-width: 1900px;" class="card">
             <div class="card-header">
                <div class="d-flex justify-content-between">
                   <a title="Go Back" class="btn btn-danger" href="<?=site_url('admin');?>" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fa fa-arrow-left">
@@ -57,38 +57,43 @@ We add student details in database and then go next page to upload student marks
             <div class="card-body">
                <h2 class="text-center bg-success text-light py-2">List of Students</h2>
                <div class="table-responsive">
-                  <table class='table border table-striped'>
-                     <thead>
+                  <table class='table table-bordered table-striped'>
+                     <thead class="text-center">
                         <tr>
-                           <th>Stu. Id</th>
-                           <th>Stu. Name</th>
+                           <th>Id</th>
+                           <th>Name</th>
+                           <th>Class</th>
+                           <th>Roll No.</th>
                            <th>Father</th>
-                           <th>Mother</th>
+                           <!-- <th>Mother</th>
                            <th>Gender</th>
                            <th>D.O.B.</th>
                            <th>Address</th>
                            <th>Mobile</th>
-                           <th>Created_at</th>
-                           <th>Updated_at</th>
-                           <th>Result Status</th>
-                           <th class="text-center" colspan="3">Action</th>
+                           <th>Created At</th>
+                           <th>Updated At</th> -->
+                           <th>Uploaded</th>
+                           <th>Marks</th>
+                           <th>Marks %</th>
+                           <th class="text-center">Action</th>
                         </tr>
                      </thead>
                      <?php if(!empty($rows)):
-      
-    foreach ($rows as $r) :
-      ?>
+                        foreach ($rows as $r) :
+                     ?>
                      <tr>
                         <td class="text-center"><?=$r["id"];?></td>
                         <td><?=$r["stu_name"];?></td>
+                        <td class="text-center"><?=$r["stu_class"];?></td>
+                        <td class="text-center"><?=$r["stu_roll"];?></td>
                         <td><?=$r["father_name"];?></td>
-                        <td><?=$r["mother_name"];?></td>
-                        <td><?=$r["gender"];?></td>
+                        <!-- <td><?=$r["mother_name"];?></td>
+                        <td class="text-center"><?=$r["gender"];?></td>
                         <td><?=$r["dob"];?></td>
                         <td><?=$r["address"];?></td>
                         <td><?=$r["mobile"];?></td>
                         <td><?=$r["created_at"];?></td>
-                        <td><?=$r["updated_at"];?></td>
+                        <td><?=$r["updated_at"];?></td> -->
                         <td class="text-center">
 
                            <!-- This is conditional link -->
@@ -100,8 +105,10 @@ We add student details in database and then go next page to upload student marks
                            <i class="fa fa-times text-danger"></i>
                            <?php endif;?>
                         </td>
+                        <td class="text-center"><?=$r['total']?>/400</td>
+                        <td class="text-center"><?=round($r['total']/4)?>%</td>
                         <td>
-                           <div class="btn-group" >
+                           <div class="btn-group text-center" >
                               <!-- This is conditional link -->
                               <!-- if result uploaded -->
                               <?php if ($r['stu_id'] != null): ?>
@@ -115,9 +122,11 @@ We add student details in database and then go next page to upload student marks
 
                               <a title="Edit & Update Student Details." class="btn btn-info"  data-bs-toggle="tooltip" data-bs-placement="top"
                                  href="<?=site_url('admin/edit_stu/'.$r["id"])?>"><i class="fa fa-user">&nbsp;</i><i class="fa fa-pencil"></i></a>
-                              <a title="Edit & Update Result." class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="top"
+                             
+                                 <a title="Edit & Update Result." class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="top"
                                  href="<?=site_url('admin/edit_result/'.$r["id"])?>"> <i class="fa fa-list">&nbsp;<i class="fa fa-pencil"></i></i></a>
-                              <a title="Detele" class="btn btn-danger"  data-bs-toggle="tooltip" data-bs-placement="top"
+                              
+                                 <a title="Detele" class="btn btn-danger"  data-bs-toggle="tooltip" data-bs-placement="top"
                                  onclick="return confirm('Are you confirm to delete <?=$r["stu_name"];?> ?');"
                                  href="<?=site_url('admin/del_stu/'.$r["id"])?>"><i class="fa fa-trash"></i></a>
                            </div>

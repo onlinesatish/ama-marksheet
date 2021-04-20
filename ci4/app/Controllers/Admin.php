@@ -20,41 +20,45 @@ class Admin extends BaseController
 	
 	public function add_student()
 	{
-		if($this->request->getMethod()=="get"){
-			// show student add page
-			return view('admin/gen/add_student');
-		}else {
-			// processing to add student
-			$data = $this->request->getPost();
-			$data["created_at"] = date("Y-m-d H:i:s");
-			// retrive data from database to check student already exist or new
-			$dbData = $this->db->table("students");
-			$row = $dbData->getWhere([
-				'stu_name' => $data['stu_name'],
-				'mother_name' => $data['mother_name'],
-				'father_name' => $data['father_name'],
-				'dob' => $data['dob']
-				])->getResultArray();
+		if ($this->session->verified_admin == "yes") {
+			if($this->request->getMethod()=="get"){
+				// show student add page
+				return view('admin/gen/add_student');
+			}else {
+				// processing to add student
+				$data = $this->request->getPost();
+				$data["created_at"] = date("Y-m-d H:i:s");
+				// retrive data from database to check student already exist or new
+				$dbData = $this->db->table("students");
+				$row = $dbData->getWhere([
+					'stu_name' => $data['stu_name'],
+					'mother_name' => $data['mother_name'],
+					'father_name' => $data['father_name'],
+					'dob' => $data['dob']
+					])->getResultArray();
 
-			if ($row != null) {
-				// if student already added
-				$html=  '<div class="alert alert-danger">This student already added.<br><hr>
-				Name: '.$data['stu_name'] . ',<br>
-				Father: '.$data["father_name"].',<hr>
-				Add another <a href="'.site_url("admin/add_student").'">Student</a> or, 
-				<a href="'.site_url("admin/all_stu_list").'">Upload Result</a>
-				</div>';
+				if ($row != null) {
+					// if student already added
+					$html=  '<div class="alert alert-danger">This student already added.<br><hr>
+					Name: '.$data['stu_name'] . ',<br>
+					Father: '.$data["father_name"].',<hr>
+					Add another <a href="'.site_url("admin/add_student").'">Student</a> or, 
+					<a href="'.site_url("admin/all_stu_list").'">Upload Result</a>
+					</div>';
 
-				return view('admin/gen/response',["response"=>$html]);
-				
-			}else{
-				// Add student if didn't add yet
-				$builder = $this->db->table("students");
-				if($builder->insert($data)){
-					$id = $this->db->insertID();
-					return redirect()->to(site_url("admin/upload_result/$id"));
+					return view('admin/gen/response',["response"=>$html]);
+					
+				}else{
+					// Add student if didn't add yet
+					$builder = $this->db->table("students");
+					if($builder->insert($data)){
+						$id = $this->db->insertID();
+						return redirect()->to(site_url("admin/upload_result/$id"));
+					}
 				}
 			}
+		}else {
+			return redirect()->to(site_url("admin/verify_admin"));
 		}
 	}
 
@@ -130,6 +134,7 @@ class Admin extends BaseController
 		$builder = $this->db->table("result");
 		$builder->select('*');
 		$builder->join('students', 'result.stu_id = students.id');
+		$builder->orderBy("stu_class ASC, stu_roll ASC");
 		$query = $builder->get();
 		$rows = $query->getResultArray();
 		
@@ -160,8 +165,8 @@ public function single_result($id){
 		// 	result.english, result.hindi, result.maths, result.drawing, result.total'
 		// );
 		$builder->select('*');
-		$query = $builder->getWhere("students.deleted_at",null);
-		$rows = $query->getResultArray();
+		$builder->orderBy("stu_id DESC");
+		$rows = $builder->getWhere("students.deleted_at",null)->getResultArray();
 		return view("admin/gen/all_stu_list",["rows"=>$rows,"verified_admin" => $va]);
 		
 	}
