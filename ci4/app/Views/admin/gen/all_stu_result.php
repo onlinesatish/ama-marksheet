@@ -591,7 +591,12 @@ if(!empty($rows)):
 		echo '<div class="alert alert-danger">No data found. Please <a href="'.site_url("admin/add_student_page").'">Add Student</a details.</div>';
 	endif;
     ?>
-
+<script>
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
+      </script>
 </body>
 
 </html>

@@ -14,7 +14,10 @@ In this we take students.stu_id primary key of students table of database.
    <!-- Bootstrap CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
-
+  <!-- fontawesome 4.7 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+  crossorigin="anonymous" />
    <title>Admin Page!</title>
 </head>
 
@@ -26,19 +29,34 @@ In this we take students.stu_id primary key of students table of database.
       <div class="container py-4">
          <div class="card">
             <div class="card-header">
-               <h4 class="d-none d-md-block card-title text-muted text-center">
-                  Update Result of <span
-                     class="text-primary"><?=$rows[0]['stu_name'].' ('.$rows[0]['stu_id'].')';?></span>
-               </h4>
-               <h6 class="d-md-none card-title text-muted text-center">
-                  Upload Result of <span
-                     class="text-primary"><?=$rows[0]['stu_name'].' ('.$rows[0]['stu_id'].')';?></span>
-               </h6>
+               <div class="d-flex justify-content-between">
+                  <!-- go to admin home -->
+                  <a title="Go to Admin Home" class="btn btn-primary" href="<?= site_url('admin'); ?>"
+                     data-bs-toggle="tooltip" data-bs-placement="top"><i class="fa fa-home">
+                        <span class="d-none d-md-inline-block"> &nbsp; Home</span></i></a>
+                  <!-- go to student list -->
+                  <a title="Go to Students List" class="btn btn-success" href="<?= site_url('admin/all_stu'); ?>"
+                     data-bs-toggle="tooltip" data-bs-placement="top"><i class="fa fa-list">
+                        <span class="d-none d-md-inline-block"> &nbsp; Students List</span></i></a>
+               </div>
             </div>
             <div class="card-body">
-               <form action="<?=site_url('admin/edit_result/'.$rows[0]['stu_id'])?>" method="post">
+               <div class="">
+                  <h4 class="d-none d-md-block card-title border py-2 mb-4 bg-warning text-center">
+                     Update Result of <span class="text-primary">
+                        <?= $rows[0]['stu_name'] . ' (' . $rows[0]['stu_id'] . ')'; ?>
+                     </span>
+                  </h4>
+                  <h6 class="d-md-none card-title border py-2 mb-4 bg-warning py-2 text-center">
+                     Upload Result of <span class="text-primary">
+                        <?= $rows[0]['stu_name'] . ' (' . $rows[0]['stu_id'] . ')'; ?>
+                     </span>
+                  </h6>
+               </div>
+
+               <form action="<?= site_url('admin/edit_result/' . $rows[0]['stu_id']) ?>" method="post">
                   <input type="hidden" name="session" value="2020-21" />
-                  <input type="hidden" name="stu_id" value="<?=$rows[0]['stu_id']?>" />
+                  <input type="hidden" name="stu_id" value="<?= $rows[0]['stu_id'] ?>" />
                   <h6 class="text-primary border-bottom border-primary">
                      Student Details
                   </h6>
@@ -47,7 +65,7 @@ In this we take students.stu_id primary key of students table of database.
                         <div class="form-group mb-3">
                            <label for="stu_class">Class</label>
                            <input required list="class-list" id="stu_class" name="stu_class" type="text"
-                              class="form-control" placeholder="Class" value="<?=$rows[0]['stu_class']?>" />
+                              class="form-control" placeholder="Class" value="<?= $rows[0]['stu_class'] ?>" />
                            <datalist id="class-list">
                               <option value="Play"></option>
                               <option value="LKG"></option>
@@ -62,8 +80,8 @@ In this we take students.stu_id primary key of students table of database.
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="stu_roll">Roll No.</label>
-                           <input required id="stu_roll" name="stu_roll" value="<?=$rows[0]['stu_roll']?>" type="number"
-                              min="1" class="form-control" placeholder="Roll Number" />
+                           <input required id="stu_roll" name="stu_roll" value="<?= $rows[0]['stu_roll'] ?>"
+                              type="number" min="1" class="form-control" placeholder="Roll Number" />
                         </div>
                      </div>
                   </div>
@@ -74,15 +92,15 @@ In this we take students.stu_id primary key of students table of database.
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="english">English</label>
-                           <input required id="english" name="english" value="<?=$rows[0]['english']?>" type="number"
+                           <input required id="english" name="english" value="<?= $rows[0]['english'] ?>" type="number"
                               min="0" max="100" onkeyup="totalMarks()" placeholder="English" class="form-control" />
                         </div>
                      </div>
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="hindi">Hindi</label>
-                           <input required id="hindi" name="hindi" value="<?=$rows[0]['hindi']?>" type="number" min="0"
-                              max="100" onkeyup="totalMarks()" placeholder="Hindi" class="form-control" />
+                           <input required id="hindi" name="hindi" value="<?= $rows[0]['hindi'] ?>" type="number"
+                              min="0" max="100" onkeyup="totalMarks()" placeholder="Hindi" class="form-control" />
                         </div>
                      </div>
                   </div>
@@ -91,14 +109,14 @@ In this we take students.stu_id primary key of students table of database.
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="maths">Maths</label>
-                           <input required id="maths" value="<?=$rows[0]['maths']?>" name="maths" type="number" min="0"
-                              max="100" onkeyup="totalMarks()" placeholder="Maths" class="form-control" />
+                           <input required id="maths" value="<?= $rows[0]['maths'] ?>" name="maths" type="number"
+                              min="0" max="100" onkeyup="totalMarks()" placeholder="Maths" class="form-control" />
                         </div>
                      </div>
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="drawing">Drawing</label>
-                           <input required id="drawing" name="drawing" value="<?=$rows[0]['drawing']?>" type="number"
+                           <input required id="drawing" name="drawing" value="<?= $rows[0]['drawing'] ?>" type="number"
                               min="0" max="100" onkeyup="totalMarks()" placeholder="Drawing" class="form-control" />
                         </div>
                      </div>
@@ -106,7 +124,7 @@ In this we take students.stu_id primary key of students table of database.
 
                   <div class="form-group mb-3">
                      <label for="total">Total</label>
-                     <input required readonly id="total" name="total" value="<?=$rows[0]['total']?>" type="number"
+                     <input required readonly id="total" name="total" value="<?= $rows[0]['total'] ?>" type="number"
                         class="form-control" />
                   </div>
                   <input required class="btn btn-success" type="submit" value="Update Marks" />
@@ -121,22 +139,28 @@ In this we take students.stu_id primary key of students table of database.
    <!-- Option 1: Bootstrap Bundle with Popper -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-   </script>
+      </script>
    <script>
-   function totalMarks() {
-      var eng = parseInt(document.querySelector("#english").value) || 0;
-      var hin = parseInt(document.querySelector("#hindi").value) || 0;
-      var maths = parseInt(document.querySelector("#maths").value) || 0;
-      var draw = parseInt(document.querySelector("#drawing").value) || 0;
+      function totalMarks() {
+         var eng = parseInt(document.querySelector("#english").value) || 0;
+         var hin = parseInt(document.querySelector("#hindi").value) || 0;
+         var maths = parseInt(document.querySelector("#maths").value) || 0;
+         var draw = parseInt(document.querySelector("#drawing").value) || 0;
 
-      document.querySelector("#total").value = eng + hin + maths + draw;
-   }
+         document.querySelector("#total").value = eng + hin + maths + draw;
+      }
    </script>
    <!-- Option 2: Separate Popper and Bootstrap JS -->
    <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
-</body>
+    <script>
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
+      </script>
+      </body>
 
 </html>

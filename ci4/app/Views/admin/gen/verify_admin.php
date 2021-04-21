@@ -31,6 +31,18 @@ We add student details in database and then go next page to upload student marks
 
 
          <div class="card">
+         <div class="card-header">
+               <div class="d-flex justify-content-between">
+                  <!-- go to admin home -->
+                  <a title="Go to Admin Home" class="btn btn-primary" href="<?= site_url('admin'); ?>"
+                     data-bs-toggle="tooltip" data-bs-placement="top"><i class="fa fa-home">
+                        <span class="d-none d-md-inline-block"> &nbsp; Home</span></i></a>
+                  <!-- go to student list -->
+                  <a title="Go to Students List" class="btn btn-success" href="<?= site_url('admin/all_stu'); ?>"
+                     data-bs-toggle="tooltip" data-bs-placement="top"><i class="fa fa-list">
+                        <span class="d-none d-md-inline-block"> &nbsp; Students List</span></i></a>
+               </div>
+            </div>
             <div class="card-body">
                <form action="<?=site_url('admin/verify_admin')?>" method="post">
                   <div class="form-group mb-3">
